@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffb3c6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💝</text></svg>">
+<title>咪峰生日快樂 💝</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg-hearts" aria-hidden="true"></div>
+
+<main id="app">
+  <!-- ========== 首頁：倒數 + 禮物月曆 ========== -->
+  <section class="page active" id="page-home">
+    <header class="hero">
+      <figure class="polaroid hidden" id="home-photo">
+        <span class="tape" aria-hidden="true"></span>
+        <div class="polaroid-img"><img id="home-photo-img" alt=""></div>
+        <figcaption id="home-photo-cap"></figcaption>
+        <span class="sticker s1" aria-hidden="true">💗</span>
+        <span class="sticker s2" aria-hidden="true">✨</span>
+        <span class="sticker s3" aria-hidden="true">🎂</span>
+      </figure>
+      <p class="hero-sub">Happy Birthday</p>
+      <h1><span class="js-nick">咪峰</span>，生日快樂倒數中</h1>
+    </header>
+    <div class="countdown" id="countdown">
+      <div class="cd-box"><span id="cd-d">00</span><small>天</small></div>
+      <div class="cd-box"><span id="cd-h">00</span><small>時</small></div>
+      <div class="cd-box"><span id="cd-m">00</span><small>分</small></div>
+      <div class="cd-box"><span id="cd-s">00</span><small>秒</small></div>
+    </div>
+    <p class="cd-note" id="cd-note">每 10 天會打開一份新禮物，生日那天就能讀到我的信 💌</p>
+    <h2 class="cal-title">🎁 生日禮物月曆</h2>
+    <div class="calendar" id="calendar"></div>
+    <p class="preview-badge hidden" id="preview-badge"></p>
+  </section>
+
+  <!-- ========== 告白信 ========== -->
+  <section class="page" id="page-letter">
+    <header class="page-head"><h2>💌 給<span class="js-nick">咪峰</span>的信</h2><p id="letter-sub">2027/1/2 00:00 一到，信就會打開喔</p></header>
+    <div class="envelope-wrap" id="envelope-wrap">
+      <div class="envelope locked" id="envelope" role="button" tabindex="0" aria-label="告白信">
+        <div class="env-back"></div>
+        <div class="env-letter"><span>💌</span></div>
+        <div class="env-front"></div>
+        <div class="env-flap"></div>
+        <div class="env-seal" id="env-seal">🔒</div>
+      </div>
+      <p class="env-hint" id="env-hint">這封信還在等生日那天…</p>
+    </div>
+    <article class="letter hidden" id="letter">
+      <h2 id="letter-title"></h2>
+      <div id="letter-body"></div>
+      <p class="letter-sign" id="letter-sign"></p>
+    </article>
+  </section>
+
+  <!-- ========== 問答題 ========== -->
+  <section class="page" id="page-quiz">
+    <header class="page-head"><h2>💭 關於我們的問答題</h2><p>看看你有多了解我？</p></header>
+    <div class="card" id="quiz-card">
+      <div class="quiz-progress"><div id="quiz-bar"></div></div>
+      <p class="quiz-count" id="quiz-count"></p>
+      <h3 class="quiz-q" id="quiz-q"></h3>
+      <div class="quiz-options" id="quiz-options"></div>
+      <p class="quiz-feedback" id="quiz-feedback"></p>
+      <button class="btn hidden" id="quiz-next">下一題 ➜</button>
+    </div>
+    <div class="card hidden center" id="quiz-result">
+      <div class="big-emoji" id="quiz-emoji">🥰</div>
+      <h3 id="quiz-score"></h3>
+      <p id="quiz-comment"></p>
+      <button class="btn" id="quiz-retry">再玩一次</button>
+    </div>
+  </section>
+
+  <!-- ========== 接愛心 ========== -->
+  <section class="page" id="page-hearts">
+    <header class="page-head"><h2>💗 接愛心</h2><p>左右滑動籃子，接住掉下來的愛心！</p></header>
+    <div class="hearts-stats"><span>⏱️ <b id="hearts-time">30</b> 秒</span><span>分數 <b id="hearts-score">0</b> / <b id="hearts-target">30</b></span></div>
+    <div class="hearts-field" id="hearts-field">
+      <div class="hearts-basket" id="hearts-basket">🧺</div>
+      <div class="hearts-start" id="hearts-start">
+        <p>💗 +1 &nbsp; 💖 +3 &nbsp; 💔 −2</p>
+        <button class="btn" id="hearts-go">開始！</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 翻牌配對 ========== -->
+  <section class="page" id="page-memory">
+    <header class="page-head"><h2>📸 照片翻牌配對</h2><p>找出一模一樣的兩張吧！</p></header>
+    <div class="memory-stats"><span>步數：<b id="mem-moves">0</b></span><span>配對：<b id="mem-pairs">0</b> / 6</span></div>
+    <div class="memory-grid" id="memory-grid"></div>
+    <div class="center"><button class="btn ghost" id="mem-restart">重新洗牌</button></div>
+  </section>
+
+  <!-- ========== 刮刮樂 ========== -->
+  <section class="page" id="page-scratch">
+    <header class="page-head"><h2>🎟️ 愛的刮刮樂</h2><p>用手指刮開，看看你得到什麼應許券～</p></header>
+    <div class="scratch-list" id="scratch-list"></div>
+  </section>
+
+  <!-- ========== 拼圖 ========== -->
+  <section class="page" id="page-puzzle">
+    <header class="page-head"><h2>🧩 回憶拼圖</h2><p>點空格旁邊的方塊來移動，把圖拼回來！</p></header>
+    <div class="memory-stats"><span>步數：<b id="puz-moves">0</b></span><button class="link-btn" id="puz-peek">👀 偷看原圖</button></div>
+    <div class="puzzle" id="puzzle"></div>
+    <div class="center"><button class="btn ghost" id="puz-restart">重新打亂</button></div>
+  </section>
+
+  <!-- ========== 情話拼字 ========== -->
+  <section class="page" id="page-words">
+    <header class="page-head"><h2>💬 情話拼字</h2><p>照著提示，按順序點字拼出句子</p></header>
+    <div class="card center" id="words-card">
+      <p class="quiz-count" id="words-count"></p>
+      <p class="words-hint" id="words-hint"></p>
+      <div class="words-slots" id="words-slots"></div>
+      <div class="words-pool" id="words-pool"></div>
+      <button class="link-btn" id="words-undo">↩︎ 退一格</button>
+    </div>
+  </section>
+
+  <!-- ========== 吹蠟燭 ========== -->
+  <section class="page" id="page-cake">
+    <header class="page-head"><h2>🎂 吹蠟燭許願</h2><p>閉上眼睛許個願，再把蠟燭吹熄吧</p></header>
+    <div class="cake-stage">
+      <div class="cake">
+        <div class="candles" id="candles"></div>
+        <div class="tier top"><div class="icing"></div></div>
+        <div class="tier bottom"><div class="icing"></div><div class="sprinkles"></div></div>
+        <div class="plate"></div>
+      </div>
+    </div>
+    <p class="cake-hint" id="cake-hint">點一下蠟燭就能吹熄 🕯️</p>
+    <div class="center btn-row">
+      <button class="btn" id="mic-btn">🎤 用麥克風吹蠟燭</button>
+      <button class="btn ghost" id="cake-reset">重新點蠟燭</button>
+    </div>
+  </section>
+</main>
+
+<button class="back-btn hidden" id="back-btn" aria-label="回禮物月曆">‹ 禮物月曆</button>
+
+<div class="overlay hidden" id="modal">
+  <div class="card center pop" id="modal-card">
+    <div class="big-emoji" id="modal-emoji">🎉</div>
+    <h3 id="modal-title"></h3>
+    <p id="modal-text"></p>
+    <div class="btn-row">
+      <button class="btn" id="modal-ok">好 💕</button>
+      <button class="btn ghost hidden" id="modal-alt">回禮物月曆</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
